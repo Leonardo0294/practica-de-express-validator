@@ -1,14 +1,15 @@
 const express = require("express");
+const app = express();
 const { body, validationResult } = require("express-validator");
 
-const app = express();
+
 
 app.use(express.json());
 app.set("view engine", "ejs");
 app.use(express.urlencoded({ extended: true }));
 
 app.get("/get", (req, res) => {
-  res.render("index");
+  res.render('index');
 });
 
 app.post(
@@ -17,30 +18,30 @@ app.post(
     body("nya", "Ingrese nombre y apellido completo")
       .exists()
       .isLength({ min: 5 }),
-    body("email", "Ingrese un email válido").exists().isEmail(),
+    body("email", "Ingrese un email válido").exists().isEmail(), // Use isEmail() to validate email format
     body("edad", "Ingrese un valor numérico").exists().isNumeric(),
   ],
   (req, res) => {
     /*const errors = validationResult(req);
     if (!errors.isEmpty()) {
-      return res.status(400).json({ errors: errors.array() });
+      res.status(400).json({errors;errors.array()});
       console.log(errors)
     }*/
-const errors = validationResult(req)
-if(!errors.isEmpty()){
-    console.log(req.body)
-    const valores = req.body
-    const validaciones = errors.array()
-    res.render('index',{validaciones:validaciones,valores:valores})
-}else{
-    res.render('¡Validacion exitosa!')
-}
-
-    res.status(200).json({ message: "Registro exitoso" });
+      
+      const errors = validationResult(req);
+      if(!errors.isEmpty()){
+        console.log(req,body)
+        const valores = req.body
+        const validaciones = errors.array()
+        res.render('index,{validaciones,valores:valores})')
+      
+    } else {
+      // Use res.send() to send a response string
+      return res.send("¡Validación exitosa!");
+    }
   }
 );
 
-app.listen(3000, () => {
-  console.log("Server is running on port 3000");
+app.listen(4000, () => {
+  console.log("Servidor corriendo en http://localhost:4000");
 });
-
