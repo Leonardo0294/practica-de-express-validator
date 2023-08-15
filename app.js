@@ -15,9 +15,13 @@ app.post(
   [
     body("nya", "Ingrese nombre y apellido completo")
       .exists()
-      .isLength({ min: 5 }),
-    body("email", "Ingrese un email válido").exists().isEmail(),
-    body("edad", "Ingrese un valor numérico").exists().isNumeric(),
+      .isLength({ min: 10 }),
+    body("email", "Ingrese un email válido")
+    .exists()
+    .isEmail(),
+    body("edad", "Ingrese un valor numérico")
+    .exists()
+    .isNumeric(),
   ],
   (req, res) => {
     const errors = validationResult(req);
